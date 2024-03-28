@@ -1,0 +1,5 @@
+Fonts used in this design:
+
+Font: PT Sans
+Author: ParaType
+Url: https://fonts.google.com/specimen/PT+Sans
