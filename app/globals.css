@@ -2,3 +2,13 @@
 @tailwind components;
 @tailwind utilities;
 
+.top__navbar__link{
+    @apply
+        text-slate-500 font-semibold
+    ;
+}
+.top__navbar__link.active{
+    @apply
+        text-slate-800 font-bold
+    ;
+}
