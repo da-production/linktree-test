@@ -1,6 +1,6 @@
-import GirdLine from "./components/Reusable/landing/GirdLine";
-import Hero from "./components/Reusable/landing/Hero";
-import Navbar from "./components/Reusable/landing/Navbar";
+import GirdLine from "@/app/components/Reusable/landing/GirdLine";
+import Hero from "@/app/components/Reusable/landing/Hero";
+import Navbar from "@/app/components/Reusable/landing/Navbar";
 
 export default async function Home() {
   return (

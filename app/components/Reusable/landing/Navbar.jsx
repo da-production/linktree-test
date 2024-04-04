@@ -3,6 +3,7 @@ import Link from 'next/link'
 import React from 'react'
 import { nextAuthOptions } from "@/app/api/auth/[...nextauth]/route";
 import Logout from "../../ui/Logout";
+import Icones from "../../ui/Icones";
 
 
 async function navbar() {
@@ -20,7 +21,9 @@ async function navbar() {
             </ul>
 
             {/* Logo */}
-            <div className=' w-1/3 flex justify-center items-center'>LogoHere</div>
+            <div className=' w-1/3 flex justify-center items-center'>
+                <Icones.logo className="w-16" />
+            </div>
 
             {/* Buttons */}
             <div className=' w-1/3 flex items-center justify-end'>
@@ -29,7 +32,12 @@ async function navbar() {
                     !session && <Link href='login' className='p-2 px-6 font-semibold rounded-sm shadow-lg bg-white text-slate-900'>Sign up</Link>
                 }
                 {
-                    !!session && <Logout />
+                    !!session && (
+                        <Link href='/account' className='p-2 px-6 font-semibold rounded-sm shadow-lg bg-white text-slate-900 flex items-center gap-1'>
+                            <Icones.userTable className='w-4' />
+                            <span>Account</span>
+                        </Link>
+                    )
                 }
                 
             </div>

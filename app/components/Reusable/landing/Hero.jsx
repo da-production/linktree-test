@@ -4,9 +4,9 @@ import Icones from '../../ui/Icones'
 import MockupProfile from './MockupProfile'
 function Hero() {
   return (
-    <div className='flex flex-col items-center justify-center gap-3 h-full max-w-xl mx-auto w-full text-white relative z-10'>
+    <div className='flex flex-col items-center justify-center gap-3 h-full max-w-lg mx-auto w-full text-white relative z-10'>
         <h1 className='text-5xl font-bold '>LinkHub</h1>
-        <p className='text-center'>simplifies your online presence by consolidating all your social media links into one easy-to-access platform. Stay connected effortlessly with our streamlined solution.</p>
+        <p className='text-center '>simplifies your online presence by consolidating all your social media links into one easy-to-access platform. Stay connected effortlessly with our streamlined solution.</p>
         
         <form className='text-xs'>
             <label

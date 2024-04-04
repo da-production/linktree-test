@@ -12,3 +12,52 @@
         text-slate-800 font-bold
     ;
 }
+
+.profile__dropdown{
+    @apply
+        absolute text-sm text-slate-100 left-16  shadow-lg  rounded-md bottom-0 origin-bottom transition-all duration-200
+        bottom-10 invisible opacity-0
+    ;
+    transform: perspective(1000) rotateX(20deg);
+    -webkit-transform: perspective(1000) rotateX(20deg);
+    -moz-transform: perspective(1000) rotateX(20deg);
+    -ms-transform: perspective(1000) rotateX(20deg);
+    -o-transform: perspective(1000) rotateX(20deg);
+}
+.profile__dropdown.active{
+    @apply
+        bottom-0 visible opacity-100
+    ;
+    transform: perspective(1000) rotateX(0deg);
+    -webkit-transform: perspective(1000) rotateX(0deg);
+    -moz-transform: perspective(1000) rotateX(0deg);
+    -ms-transform: perspective(1000) rotateX(0deg);
+    -o-transform: perspective(1000) rotateX(0deg);
+}
+.profile__dropdown.inactive{
+    @apply -bottom-10 invisible opacity-0;
+    transform: perspective(1000) rotateX(-20deg);
+    -webkit-transform: perspective(1000) rotateX(-20deg);
+    -moz-transform: perspective(1000) rotateX(-20deg);
+    -ms-transform: perspective(1000) rotateX(-20deg);
+    -o-transform: perspective(1000) rotateX(-20deg);
+}
+
+.tooltip{
+    @apply
+        absolute bg-black text-white block rounded-md px-2 py-1 
+        transition-all duration-150 invisible opacity-0
+        group-hover:opacity-100 group-hover:visible
+        z-10
+    ;
+}
+
+
+.tooltip__br{
+    @apply
+        top-full right-0 mt-5 
+        before:absolute before:w-3 before:h-3 before:bottom-full before:right-1
+        before:border-[6px] before:border-transparent before:border-b-black
+        group-hover:mt-2
+    ;
+}

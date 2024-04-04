@@ -1,0 +1,77 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("MONGODB_URI")
+}
+
+enum Roles {
+  ADMIN
+  USER
+}
+
+model User{
+  id        String    @id @default(cuid()) @map("_id")
+  name      String
+  email     String
+  emailVerified DateTime?
+  image     String?
+  password  String?
+  role      Roles @default(USER)
+  accounts  Account[]
+  pages Page[]
+  usermetas UserMeta[]
+}
+
+model Account {
+  id                 String  @id @default(cuid()) @map("_id")
+  userId             String
+  type               String
+  provider           String
+  providerAccountId  String
+  refresh_token      String?  
+  access_token       String?  
+  expires_at         Int?
+  token_type         String?
+  scope              String?
+  id_token           String?  
+  session_state      String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+}
+
+model Page{
+  id            String    @id @default(cuid()) @map("_id")
+  userId        String
+  uri           String
+  bio           String
+  profile_picture String?
+  background_image String?
+  background_color String?
+  user             User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  pageId String?
+}
+
+model UserMeta{
+  id        String    @id @default(cuid()) @map("_id")
+  userId    String
+  username  String @unique
+  bio        String
+  description String
+  birthday   String
+  website    String
+  country    String
+  address    String
+  user             User @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
