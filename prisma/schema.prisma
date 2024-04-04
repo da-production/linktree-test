@@ -19,7 +19,7 @@ enum Roles {
 }
 
 model User{
-  id        String    @id @default(cuid()) @map("_id")
+  id        String @id @map("_id") @default(auto()) @db.ObjectId
   name      String
   email     String
   emailVerified DateTime?
@@ -27,13 +27,13 @@ model User{
   password  String?
   role      Roles @default(USER)
   accounts  Account[]
-  pages Page[]
+  pages     Page[]
   usermetas UserMeta[]
 }
 
 model Account {
-  id                 String  @id @default(cuid()) @map("_id")
-  userId             String
+  id                 String  @id @default(cuid()) @map("_id") @db.ObjectId
+  userId             String @db.ObjectId
   type               String
   provider           String
   providerAccountId  String
@@ -51,21 +51,20 @@ model Account {
 }
 
 model Page{
-  id            String    @id @default(cuid()) @map("_id")
-  userId        String
+  id            String    @id @default(cuid()) @map("_id") @db.ObjectId
+  userId        String @db.ObjectId
   uri           String
   bio           String
   profile_picture String?
   background_image String?
   background_color String?
   user             User @relation(fields: [userId], references: [id], onDelete: Cascade)
-
-  pageId String?
+    
 }
 
 model UserMeta{
-  id        String    @id @default(cuid()) @map("_id")
-  userId    String
+  id        String    @id @default(auto()) @map("_id") @db.ObjectId
+  userId    String @db.ObjectId
   username  String @unique
   bio        String
   description String
@@ -74,4 +73,5 @@ model UserMeta{
   country    String
   address    String
   user             User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  
 }
