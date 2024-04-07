@@ -25,10 +25,8 @@ const LoginForm = () => {
 
             await RegisterAction(data)
             .then(data=>{
-                if(data?.error){
-                    setError(data?.error)
-                    setSuccess(data?.success)
-                }
+                setError(data?.error)
+                setSuccess(data?.success)
             })
             .catch(error=>{
                 console.log(error)
@@ -39,8 +37,13 @@ const LoginForm = () => {
     return (  
         <>
             {
-                error && <div className="flex items-center space-x-2">
+                error && <div className="flex items-center space-x-2 p-3 rounded-lg bg-red-100 border-2 border-red-200 text-xs">
                     <p className="text-red-500">{error}</p>
+                </div>
+            }
+            {
+                success && <div className="flex items-center space-x-2 p-3 rounded-lg bg-green-100 border-2 border-green-200 text-xs">
+                    <p className="text-green-700">{success}</p>
                 </div>
             }
             <form className='flex flex-col w-full space-y-5' onSubmit={handleSubmit(submit)}>

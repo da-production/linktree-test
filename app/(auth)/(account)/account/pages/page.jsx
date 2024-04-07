@@ -8,9 +8,7 @@ import Link from 'next/link'
 import React from 'react'
 
 async function page() {
-    const session = await getServerSession(nextAuthOptions);
-    mongoose.connect(process.env.MONGODB_URI)
-    const pages = await Page.find().where("owner",session.user.email).exec()
+    const pages = []
     return (
         <div className='grid grid-cols-4 gap-10 p-5'>
             {

@@ -6,7 +6,7 @@ function RightTopNavBar() {
     const {values} = useContext(AccountContext)
     return (
         <div className="h-16 tex-sm bg-[#e3e6e9] flex justify-center items-center">
-            <span>linkhub/@{values.usermeta?.username || 'clame a username'}</span>
+            <span>linkhub/@{values.user?.meta?.username || 'clame a username'}</span>
         </div>
     )
 }

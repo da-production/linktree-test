@@ -7,9 +7,9 @@ import React, { useContext, useEffect, useState } from 'react'
 import { AccountContext } from '@/stores/Account'
 import countries from '@/libs/countries'
 import Tooltip from '@/app/components/ui/Tooltip'
-function Form({usermetas}) {
+function Form({user}) {
     const [state, formState] = useFormState(StoreUserMeta,null)
-    const [tArea, setTArea] = useState(usermetas?.description)
+    const [tArea, setTArea] = useState(user?.description)
     const {setUsername} = useContext(AccountContext)
 
     return (
@@ -23,15 +23,15 @@ function Form({usermetas}) {
                                     <Icones.email className="w-6" />
                                 </label>
                                 {
-                                    usermetas?.username ? (
-                                        <input type='text' defaultValue={usermetas?.username} placeholder='clame a username' disabled={true} className='outline-none w-52' />
+                                    user.meta?.username ? (
+                                        <input type='text' defaultValue={user.meta?.username} placeholder='clame a username' disabled={true} className='outline-none w-52' />
                                     ) : (
                                         <input 
                                             type='text' 
                                             id='username' 
-                                            defaultValue={usermetas?.username} 
+                                            defaultValue={user.meta?.username} 
                                             placeholder='clame a username' 
-                                            name='username' 
+                                            name='name' 
                                             className='outline-none w-52' 
                                             onChange={(e)=>setUsername(e.target.value)}
                                             />
@@ -54,7 +54,7 @@ function Form({usermetas}) {
                                 <label htmlFor='bio'>
                                     <Icones.bioSolar className="w-6" />
                                 </label>
-                                <input type='text' id='bio' defaultValue={usermetas?.bio} placeholder='Short Bio' name='bio' className='outline-none w-full' />
+                                <input type='text' id='bio' defaultValue={user?.bio} placeholder='Short Bio' name='bio' className='outline-none w-full' />
                             </div>
                             <div className='mt-3'>
                                 <small className='relative text-xs justify-between flex gap-2 items-center'>
@@ -87,7 +87,7 @@ function Form({usermetas}) {
                                 <input 
                                     type='date' 
                                     id='birthday' 
-                                    defaultValue={usermetas?.birthday} 
+                                    defaultValue={user?.birthday} 
                                     placeholder='Birthday' 
                                     name='birthday' 
                                     className='outline-none w-52' 
@@ -106,7 +106,7 @@ function Form({usermetas}) {
                                 <label htmlFor='website'>
                                     <Icones.linkSolar className="w-6" />
                                 </label>
-                                <input type='url' id='website' defaultValue={usermetas?.website} placeholder='Website' name='website' className='outline-none w-full' />
+                                <input type='url' id='website' defaultValue={user?.website} placeholder='Website' name='website' className='outline-none w-full' />
                             </div>
                             <div className='mt-3'>
                                 <small className='relative text-xs justify-between flex gap-2 items-center'>
@@ -122,11 +122,11 @@ function Form({usermetas}) {
                                 <label htmlFor='birthday'>
                                     <Icones.earthBold className="w-6" />
                                 </label>
-                                <select className='outline-none w-52' name='country' defaultValue={usermetas?.country}>
+                                <select className='outline-none w-52' name='country' defaultValue={user?.country}>
                                     <option>Country</option>
                                     {
                                         countries.map(country => (
-                                            <option defaultValue={usermetas?.country == country.name} value={country.name} key={country.code}>{country.name}</option>
+                                            <option defaultValue={user?.country == country.name} value={country.name} key={country.code}>{country.name}</option>
                                         ))
                                     }
                                 </select>
@@ -144,7 +144,7 @@ function Form({usermetas}) {
                                 <label htmlFor='address'>
                                     <Icones.smartHome className="w-6" />
                                 </label>
-                                <input type='text' id='address' defaultValue={usermetas?.address} placeholder='Address' name='address' className='outline-none w-full' />
+                                <input type='text' id='address' defaultValue={user?.address} placeholder='Address' name='address' className='outline-none w-full' />
                             </div>
                             <div className='mt-3'>
                                 <small className='relative text-xs justify-between flex gap-2 items-center'>

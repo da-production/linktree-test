@@ -26,21 +26,18 @@ const RegisterAction = async (values: z.infer<typeof RegisterSchema>) => {
         }
 
         const hashedPassword = await bcryptjs.hash(password, 10)
-       
-        try{
-            await db.user.create({
-                data: {
-                    name:name,
-                    email,
-                    password:hashedPassword,
-                    
+        await db.user.create({
+            data: {
+                name,
+                email,
+                password:hashedPassword,
+                usermetas: {
+                    create: [
+                        {username: name}
+                    ]
                 }
-            })
-        }catch(e){
-            console.log(e);
-            
-        }
-
+            }
+        })
         return {success: "User created"}
 
     }

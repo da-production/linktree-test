@@ -1,19 +1,32 @@
 "use server"
-import { getUserByEmail } from "@/data/user"
 import { LoginSchema } from "@/schemas"
 import { z } from "zod"
+import { signIn } from "@/auth"
+import { DEFAULT_LOGIN_REDIRECT } from "@/routes"
+import { AuthError } from "next-auth"
 
 const LoginAction = async(values: z.infer<typeof LoginSchema>) => {
-    const validateFileds = LoginSchema.safeParse(values)
-    if(validateFileds.success){
-        const {email,password} = validateFileds.data
-
-        const user = await getUserByEmail(email)
-        console.log(user)
-
-        return {success: "loged in"}
+    const validatedFields = LoginSchema.safeParse(values)
+    if(!validatedFields.success){
+        return { error: "invalide fields! "}
     }
-    return {error: "please fill all fields"}
+
+    const {email,password} = validatedFields.data
+    try {
+        await signIn('credentials', { email, password, redirectTo: DEFAULT_LOGIN_REDIRECT })
+    }catch(error){
+        if (error instanceof AuthError){
+            switch(error.type){
+                case 'CredentialsSignin':
+                    return { error: "invalid credentials" }
+                default:
+                    return { error: "unknown error" }
+            }
+        }
+        console.log(error);
+        
+        throw error
+    }
 }
 
 export default LoginAction

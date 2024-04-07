@@ -10,12 +10,8 @@ import PageHome from '@/app/components/Reusable/PageHome';
 
 async function page(req) {
   
-  const session = await getServerSession(nextAuthOptions);
-  if(session == null) redirect('/login')
   let template = undefined
-  mongoose.connect(process.env.MONGODB_URI)
-  const userId = await User.findOne({},'_id').where('email',session.user.email).exec()
-  const page = await Page.findOne().where('userId',userId).exec()
+
   if(page == null) {
     template = <NewPage />
   }else{

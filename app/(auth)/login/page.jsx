@@ -1,20 +1,11 @@
 
 import React from 'react'
-import {signIn} from 'next-auth/react'
-import JoinForm from '@/app/components/ui/JoinForm'
 import AuthProvider from '@/app/components/ui/AuthProvider'
 import Icones from '@/app/components/ui/Icones'
-import { getServerSession } from 'next-auth'
-import { nextAuthOptions } from '@/app/api/auth/[...nextauth]/route'
-import { redirect } from 'next/navigation'
 import Link from 'next/link'
 import LoginForm from './components/LoginForm.tsx'
 
 async function page() {
-
-  const session = await getServerSession(nextAuthOptions);
-  if(session) redirect('/account')
-
   return (
     <>
       <div className="flex min-h-screen">
@@ -73,7 +64,7 @@ async function page() {
                   <span className="w-full border border-black" />
                 </div>
                 <AuthProvider title="Sign in with Google" icon={<Icones.googleColor />} provider='google' />
-                <AuthProvider title="Sign in with Github" icon={<Icones.github />} provider='google' />
+                <AuthProvider title="Sign in with Github" icon={<Icones.github />} provider='github' />
                 <AuthProvider title="Sign in with LinkedinColor" icon={<Icones.linkedinColor />} provider='google' />
               </div>
             </div>
@@ -82,7 +73,7 @@ async function page() {
               <p className="font-bold mb-1">
                 Built by{" "}
                 <a href="#" className="underline dark:text-white">
-                  Frank Esteban
+                  Mebrouki Amine
                 </a>
               </p>
               <p>Contact me on the different platforms and social networks</p>

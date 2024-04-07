@@ -19,14 +19,14 @@ const LoginForm = () => {
     })
 
     const submit = async (data: z.infer<typeof LoginSchema>) => {
+        setError(undefined)
+        setSuccess(undefined)
         startTransition(async ()=>{
 
             await LoginAction(data)
             .then(data=>{
-                if(data?.error){
-                    setError(data?.error)
-                    setSuccess(data?.success)
-                }
+                setError(data?.error)
+                setSuccess(data?.success)
             })
             .catch(error=>{
                 console.log(error)
@@ -36,6 +36,16 @@ const LoginForm = () => {
 
     return (  
         <>
+            {
+                error && <div className="flex items-center space-x-2 p-3 rounded-lg bg-red-100 border-2 border-red-200 text-xs">
+                    <p className="text-red-500">{error}</p>
+                </div>
+            }
+            {
+                success && <div className="flex items-center space-x-2 p-3 rounded-lg bg-green-100 border-2 border-green-200 text-xs">
+                    <p className="text-green-700">{success}</p>
+                </div>
+            }
             <form className='flex flex-col w-full space-y-5' onSubmit={handleSubmit(submit)}>
                 {/* <div className='w-full relative'>
                     <label className='absolute left-4 top-[14px] font-semibold'>linkhub.to/</label>
@@ -73,9 +83,11 @@ const LoginForm = () => {
                     />
                     <small className="text-xs text-red-500">{errors?.password?.message}</small>
                 </div>
-                <button className="flex items-center justify-center flex-none px-3 py-2 md:px-4 md:py-3 border-2 rounded-lg font-medium border-black bg-black text-white">
-                    Join
+                
+                <button disabled={isPending} className="flex items-center justify-center flex-none px-3 py-2 md:px-4 md:py-3 border-2 rounded-lg font-medium border-black bg-black text-white">
+                    {isPending ? (<Icones.spinner className="size-6" />) : "Join"}
                 </button>
+                
             </form>
         </>
     )

@@ -66,12 +66,12 @@ model UserMeta{
   id        String    @id @default(auto()) @map("_id") @db.ObjectId
   userId    String @db.ObjectId
   username  String @unique
-  bio        String
-  description String
-  birthday   String
-  website    String
-  country    String
-  address    String
+  bio        String?
+  description String?
+  birthday   String?
+  website    String?
+  country    String?
+  address    String?
   user             User @relation(fields: [userId], references: [id], onDelete: Cascade)
   
 }

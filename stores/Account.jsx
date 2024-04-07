@@ -11,9 +11,9 @@ const AccountContextProvider = ({children,...props}) => {
         setValue(pre=>(
             {
                 ...pre.user,
-                usermeta:{
-                    ...pre.usermeta,
-                    username:username,
+                meta: {
+                    ...pre.meta,
+                    name: username
                 }
             }
         ))

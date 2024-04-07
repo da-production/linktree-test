@@ -11,6 +11,7 @@ import { UserMeta } from "@/models/UserMeta";
 import mongoose from "mongoose";
 import AccountContextProvider from "@/stores/Account";
 import RightTopNavBar from "@/app/components/Reusable/RightTopNavBar";
+import { auth } from "@/auth";
 
 const font = DM_Sans({ subsets: ["latin"] });
 
@@ -20,15 +21,11 @@ export const metadata = {
 };
 
 export default async function RootLayout({ children }) {
-    const session = await getServerSession(nextAuthOptions);
-    if(session == null) redirect('/login')
-    mongoose.connect(process.env.MONGODB_URI)
-    const user = await User.findOne().where('email',session.user.email)
-    const usermeta = await UserMeta.findOne().where('userId', user._id)
+    const session = await auth()
     return (
         <html lang="en">
             <body className={`${font.className} `}>
-                <AccountContextProvider values={{user,usermeta}}>
+                <AccountContextProvider values={session.user}>
                     <div className="min-h-screen flex w-full">
                         {/* bg-[#1a2c3b] */}
                         <div className=" w-16 bg-black col-span-1">

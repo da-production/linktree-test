@@ -4,10 +4,10 @@ import { getServerSession } from 'next-auth'
 import { nextAuthOptions } from '@/app/api/auth/[...nextauth]/route'
 import Icones from '../ui/Icones'
 import Link from 'next/link'
+import { auth } from '@/auth'
 
 async function Sidebar() {
-  const session = await getServerSession(nextAuthOptions);
-  
+  const session = await auth();
   return (
     <div className='flex flex-col items-center h-full'>
       <div className='text-white w-full h-16 flex justify-center items-center '>
